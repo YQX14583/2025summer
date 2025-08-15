@@ -111,9 +111,16 @@ void typename##_random_shuffle(typename* list)\
     }\
 }\
 
+inline int compare_int32(int a, int b)
+{
+    if (a < b) return -1;
+    if (a == b) return 0;
+    return 1;
+}
 
 DeclareList(Clause, int)
 DeclareList(ClauseList, Clause*)
+DeclareList(StrList, char*)
 
 
 typedef void (*destroyer)(void*);
@@ -148,8 +155,8 @@ bool list_int_in_list(PtrList* list, int val);
 
 void list_random_shuffle(PtrList* list);
 
-inline int compare_int(const void* a, const void* b);
+int compare_int(const void* a, const void* b);
 
-inline int compare_int_list(const PtrList* a, const PtrList* b);
+int compare_int_list(const PtrList* a, const PtrList* b);
 
-inline int compare_int_list_qsort(const void* a, const void* b);
+int compare_int_list_qsort(const void* a, const void* b);

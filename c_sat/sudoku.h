@@ -8,6 +8,9 @@ typedef struct
     int col;
 } Coordinate;
 
+//DeclareList(SudokuRow, int)
+//DeclareList(Sudoku, SudokuRow*)
+
 PtrList* get_box(int r, int c);
 
 PtrList* read_lines(const char* filename);

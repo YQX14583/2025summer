@@ -4,6 +4,9 @@
 
 #include "sudoku.h"
 
+//DefineList(SudokuRow, int, NULL, compare_int32)
+//DefineList(Sudoku, SudokuRow*, SudokuRow_destroy, NULL)
+
 
 //ªÒ»°æ≈π¨∏Ò
 PtrList* get_box(int r, int c)

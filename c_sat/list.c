@@ -5,12 +5,6 @@
 #include <stdbool.h>
 #include "list.h"
 
-int compare_int32(int a, int b)
-{
-    if (a < b) return -1;
-    if (a == b) return 0;
-    return 1;
-}
 
 int compare_clause(Clause* a, Clause* b)
 {
@@ -32,7 +26,7 @@ int compare_clause(Clause* a, Clause* b)
 
 DefineList(Clause, int, NULL, compare_int32)
 DefineList(ClauseList, Clause*, Clause_destroy, compare_clause)
-
+DefineList(StrList, char*, free, strcmp)
 
 // 创建新的 PtrList
 PtrList* list_create(int capacity)
@@ -208,7 +202,7 @@ void list_random_shuffle(PtrList* list)
 
 
 //比较整型元素
-inline int compare_int(const void* a, const void* b)
+int compare_int(const void* a, const void* b)
 {
     int ia = (int)(int64_t) * (void**)a; // 直接转换指针值为整数
     int ib = (int)(int64_t) * (void**)b;
@@ -219,7 +213,7 @@ inline int compare_int(const void* a, const void* b)
 
 
 //比较整型列表
-inline int compare_int_list(const PtrList* a, const PtrList* b)
+int compare_int_list(const PtrList* a, const PtrList* b)
 {
     if (a == NULL || b == NULL) return false;
 
@@ -239,7 +233,7 @@ inline int compare_int_list(const PtrList* a, const PtrList* b)
 
 
 //用于qsort
-inline int compare_int_list_qsort(const void* a, const void* b)
+int compare_int_list_qsort(const void* a, const void* b)
 {
     return compare_int_list(*(PtrList**)a, *(PtrList**)b);
 }
