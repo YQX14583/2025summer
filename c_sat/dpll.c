@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "dict.h"
-#include "list.h"
 #include "sudoku.h"
 #include "dpll.h"
 

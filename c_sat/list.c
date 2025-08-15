@@ -5,6 +5,34 @@
 #include <stdbool.h>
 #include "list.h"
 
+int compare_int32(int a, int b)
+{
+    if (a < b) return -1;
+    if (a == b) return 0;
+    return 1;
+}
+
+int compare_clause(Clause* a, Clause* b)
+{
+    if (a == NULL || b == NULL) return false;
+
+    const int compare_size = min(a->size, b->size);
+    for (int i = 0; i < compare_size; i++)
+    {
+        const int va = a->data[i];
+        const int vb = b->data[i];
+        if (va > vb) return 1;
+        if (va < vb) return -1;
+    }
+
+    if (a->size > b->size) return 1;
+    if (a->size < b->size) return -1;
+    return 0;
+}
+
+DefineList(Clause, int, NULL, compare_int32)
+DefineList(ClauseList, Clause*, Clause_destroy, compare_clause)
+
 
 // 创建新的 PtrList
 PtrList* list_create(int capacity)

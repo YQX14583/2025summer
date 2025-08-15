@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 #include "dict.h"
-#include "list.h"
 
 
 int hash(int x)

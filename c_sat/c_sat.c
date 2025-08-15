@@ -114,7 +114,7 @@ int compare_abs(const void* a, const void* b)
 }
 
 
-int main()
+int main2()
 {
     srand((unsigned)time(NULL));
 
@@ -258,4 +258,27 @@ int main()
     }
 
     _CrtDumpMemoryLeaks();
+    return 0;
+}
+
+void dump_clause(Clause* c)
+{
+    for (int i = 0; i < c->size; ++i)
+    {
+        int v;
+        Clause_get(c, i, &v);
+        printf("%d ", v);
+    }
+    printf("\n");
+}
+
+int main(void)
+{
+    Clause* c = Clause_create(1);
+    for (int i = 0; i < 1000; ++i)
+    {
+        Clause_append(c, i);
+    }
+    dump_clause(c);
+    return 0;
 }

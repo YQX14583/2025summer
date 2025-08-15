@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "list.h"
-#include "list.h"
 #include "sudoku.h"
 
 PtrList* get_box(int r, int c)

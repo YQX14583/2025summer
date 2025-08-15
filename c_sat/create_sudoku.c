@@ -3,8 +3,6 @@
 #include <time.h>
 #include <stdbool.h>
 
-#include "list.h"
-#include "dict.h"
 #include "sudoku.h"
 #include "create_sudoku.h"
 

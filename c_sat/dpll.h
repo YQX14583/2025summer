@@ -1,5 +1,7 @@
 #pragma once
 
+#include "dict.h"
+
 PtrList* str_split(const char* s);
 
 PtrList* read_cnf_file(const char* filename);

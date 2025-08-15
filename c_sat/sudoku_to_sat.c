@@ -3,8 +3,6 @@
 #include <stdint.h>
 #include <math.h>
 
-#include "list.h"
-#include "dict.h"
 #include "dpll.h"
 #include "sudoku.h"
 #include "sudoku_to_sat.h"

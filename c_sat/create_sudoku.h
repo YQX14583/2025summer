@@ -1,5 +1,7 @@
 #pragma once
 
+#include "list.h"
+
 void print_board(PtrList* sudoku);
 
 bool is_valid(PtrList* sudoku, int row, int col, int value);
