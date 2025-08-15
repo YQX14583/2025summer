@@ -18,6 +18,7 @@ PtrList* cross_line = NULL;
 //初始化数独结构
 void init_sudoku_structures()
 {
+    //以行切分数独
     rows = list_create(9);
     for (int i = 1; i < 10; i++)
     {
@@ -27,6 +28,7 @@ void init_sudoku_structures()
         list_append(rows, s_rows);
     }
 
+    //以列切分数独
     cols = list_create(9);
     for (int i = 1; i < 10; i++)
     {
@@ -36,6 +38,7 @@ void init_sudoku_structures()
         list_append(cols, s_cols);
     }
 
+    //以九宫格切分数独
     boxes = list_create(9);
     int box_rows[] = {1, 4, 7};
     int box_cols[] = {1, 4, 7};
@@ -48,6 +51,7 @@ void init_sudoku_structures()
         }
     }
 
+    //百分号中的两个九宫格
     pcf_boxes = list_create(2);
     list_append(pcf_boxes, get_box(2, 2));
     list_append(pcf_boxes, get_box(6, 6));
@@ -56,6 +60,7 @@ void init_sudoku_structures()
     append_coordiante(pcf_centers, 3, 3);
     append_coordiante(pcf_centers, 7, 7);
 
+    //副对角线
     cross_line = list_create(1);
     PtrList* s_cross_line = list_create(9);
     for (int r = 1; r <= 9; r++)
@@ -161,23 +166,6 @@ void create_cnf(char* filename)
         list_append_int(temp5, 100 * (x + 1) + 10 * (y + 1) + v);
         list_append(list_cnf, temp5);
     }
-
-    // debug: output list_cnf
-    //FILE* tempf = fopen("E:\\Workspace\\2025summer\\c_sat\\list_cnf.txt", "wt");
-    //for (int i = 0; i < list_cnf->size; i++)
-    //{
-    //	PtrList* cnf;
-    //	list_get(list_cnf, i, &cnf);
-    //	for (int j = 0; j < cnf->size; j++)
-    //	{
-    //		int v;
-    //		list_get_int(cnf, j, &v);
-    //		fprintf(tempf, "%d ", v);
-    //	}
-    //	fprintf(tempf, "\n");
-    //}
-    //
-    //fclose(tempf);
 
     //文字去重，存入literals中
     PtrList* literals = list_create(100);

@@ -4,6 +4,8 @@
 
 #include "sudoku.h"
 
+
+//获取九宫格
 PtrList* get_box(int r, int c)
 {
     PtrList* ret = list_create(9);
@@ -24,6 +26,8 @@ PtrList* get_box(int r, int c)
     return ret;
 }
 
+
+//逐行读取文件
 PtrList* read_lines(const char* filename)
 {
     FILE* file = fopen(filename, "r");
@@ -52,9 +56,8 @@ PtrList* read_lines(const char* filename)
     return lines;
 }
 
-//使用后要list_destroy(lines,free)
 
-
+//追加二元组元素
 void append_coordiante(PtrList* coordinates, int row, int col)
 {
     if (!coordinates) return;

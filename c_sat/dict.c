@@ -5,6 +5,7 @@
 #include "dict.h"
 
 
+//哈希结构
 int hash(int x)
 {
     x = ((x >> 16) ^ x) * 0x45d9f3b;
@@ -14,16 +15,18 @@ int hash(int x)
     return x;
 }
 
+
 //带嵌套销毁的KV对
 void destroy_kv_pair(void* element)
 {
     if (!element) return;
     KV* kv = element;
-    // 如果KV.value需要特殊处理：
-    // if (kv->value_needs_free) free(kv->value);
+    // 如果KV.value需要特殊处理:
     free(kv);
 }
 
+
+//创建字典
 Dict* dict_create(int bucket_cnt)
 {
     Dict* dict = malloc(sizeof(Dict));
@@ -46,6 +49,8 @@ Dict* dict_create(int bucket_cnt)
     return dict;
 }
 
+
+// 销毁字典
 void dict_destory(Dict* dict)
 {
     for (int i = 0; i < dict->bucket_cnt; ++i)
@@ -58,6 +63,8 @@ void dict_destory(Dict* dict)
     free(dict);
 }
 
+
+//根据给定的key获取字典中对应的桶
 PtrList* dict_get_bucket(const Dict* dict, const int key)
 {
     // get bucket by hash of key
@@ -66,6 +73,8 @@ PtrList* dict_get_bucket(const Dict* dict, const int key)
     return bucket;
 }
 
+
+//根据给定的key获取对应的键值对
 KV* dict_find_kv(const Dict* dict, const int key)
 {
     PtrList* bucket = dict_get_bucket(dict, key);
@@ -85,6 +94,8 @@ KV* dict_find_kv(const Dict* dict, const int key)
     return kv;
 }
 
+
+//给字典赋值
 bool dict_set(const Dict* dict, const int key, const int value)
 {
     KV* kv = dict_find_kv(dict, key);
@@ -107,6 +118,8 @@ bool dict_set(const Dict* dict, const int key, const int value)
     return true;
 }
 
+
+//获取value
 bool dict_get(const Dict* dict, const int key, int* value)
 {
     KV* kv = dict_find_kv(dict, key);
@@ -117,6 +130,7 @@ bool dict_get(const Dict* dict, const int key, int* value)
     *value = kv->value;
     return true;
 }
+
 
 // 排序
 PtrList* dict_sorted(const Dict* dict, kv_comparer comp)

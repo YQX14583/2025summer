@@ -138,6 +138,7 @@ bool list_get_int(PtrList* list, int index, int* ret)
     return true; // 成功
 }
 
+
 // 设置整型元素
 bool list_set_int(PtrList* list, int index, int value)
 {
@@ -146,6 +147,7 @@ bool list_set_int(PtrList* list, int index, int value)
     list->ptrArray[index] = (void*)(int64_t)value;
     return true;
 }
+
 
 // 排序
 void list_sort(PtrList* list, comparer comp)
@@ -173,6 +175,8 @@ bool list_element_in_list(PtrList* list, const void* element, comparer comp)
     return false;
 }
 
+
+//判断整型元素是否在表内
 bool list_int_in_list(PtrList* list, int val)
 {
     if (!list) return false;
@@ -185,6 +189,7 @@ bool list_int_in_list(PtrList* list, int val)
 
     return false;
 }
+
 
 // 随机调换顺序
 void list_random_shuffle(PtrList* list)
@@ -199,4 +204,42 @@ void list_random_shuffle(PtrList* list)
         list->ptrArray[x] = list->ptrArray[y];
         list->ptrArray[y] = temp;
     }
+}
+
+
+//比较整型元素
+inline int compare_int(const void* a, const void* b)
+{
+    int ia = (int)(int64_t) * (void**)a; // 直接转换指针值为整数
+    int ib = (int)(int64_t) * (void**)b;
+    if (ia < ib) return -1;
+    if (ia == ib) return 0;
+    return 1;
+}
+
+
+//比较整型列表
+inline int compare_int_list(const PtrList* a, const PtrList* b)
+{
+    if (a == NULL || b == NULL) return false;
+
+    const int compare_size = min(a->size, b->size);
+    for (int i = 0; i < compare_size; i++)
+    {
+        const int va = (int)(int64_t)a->ptrArray[i];
+        const int vb = (int)(int64_t)b->ptrArray[i];
+        if (va > vb) return 1;
+        if (va < vb) return -1;
+    }
+
+    if (a->size > b->size) return 1;
+    if (a->size < b->size) return -1;
+    return 0;
+}
+
+
+//用于qsort
+inline int compare_int_list_qsort(const void* a, const void* b)
+{
+    return compare_int_list(*(PtrList**)a, *(PtrList**)b);
 }
