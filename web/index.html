@@ -1,29 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>first step to html</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Play Music</title>
     <style>
-        /*body {*/
-        /*    background-color: red*/
-        /*}*/
+        /* Reset styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        #msg {
-            margin-left: 20px;
-            margin-top: 40px;
+        body {
+            font-family: 'Arial', sans-serif;
+            color: white;
+            background-color: #121212;
+            height: 100vh;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            animation: background-animation 25s infinite; /* 背景图切换动画 */
         }
-    </style>
 
+        /* 背景图切换动画 */
+        @keyframes background-animation {
+            0% {
+                background-image: url('image/gzp2DYV2.jpeg'); /* 第1张背景 */
+            }
+            20% {
+                background-image: url('image/dMIq1HzJ.jpeg'); /* 第2张背景 */
+            }
+            40% {
+                background-image: url('image/dTTcmJH0.jpeg'); /* 第3张背景 */
+            }
+            60% {
+                background-image: url('image/qla2kEBs.jpeg'); /* 第4张背景 */
+            }
+            80% {
+                background-image: url('image/X0_6rTZl.jpeg'); /* 第5张背景 */
+            }
+            100% {
+                background-image: url('image/gzp2DYV2.jpeg'); /* 循环回第1张背景 */
+            }
+        }
+
+        /* 视频容器样式 - 固定在文字正上方 */
+        .video-container {
+            position: absolute;
+            bottom: 350px; /* 调整到文字上方更远的位置 */
+            right: 20px;
+            width: 520px;
+            height: 230px;
+            z-index: 90;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 右下角所有内容 */
+        .content {
+            position: absolute;
+            bottom: 40px; /* 适当上移，距离底部40px */
+            right: 20px; /* 距离右侧20px */
+            text-align: center; /* 使标题居中对齐 */
+            z-index: 100;
+            display: flex; /* 设置为flex布局 */
+            flex-direction: column; /* 垂直排列元素 */
+            justify-content: center; /* 垂直居中对齐 */
+            align-items: center; /* 水平居中对齐 */
+        }
+
+        /* 标题和标签样式 */
+        .content h1 {
+            font-size: 3.0rem;
+            margin-bottom: 15px;
+            line-height: 1;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 900; /* 设置为粗体 */
+        }
+
+        .content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            line-height: 1;
+            font-family: 'Nunito', sans-serif; /* 使用 Nunito 字体 */
+        }
+
+        /* 按钮容器 */
+        .download-buttons {
+            width: 100%; /* 确保容器的宽度 */
+            margin-top: 20px; /* 顶部间距 */
+        }
+
+        /* 每个按钮 */
+        .download-buttons a {
+            display: inline-block; /* 使按钮在一行显示 */
+            width: 40%;
+            margin-right: 3%;
+            margin-bottom: 20px; /* 每行按钮之间的间距 */
+            padding: 12px 24px;
+            background-color: #1e90ff;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center; /* 确保文字水平居中 */
+        }
+
+        /* 确保按钮在较小屏幕上仍显示两行 */
+        @media (max-width: 768px) {
+            .download-buttons a {
+                width: 100%; /* 在屏幕较小时让按钮占据整行 */
+            }
+
+            .video-container {
+                width: 300px;
+                height: 170px;
+                bottom: 300px; /* 移动端也向上调整 */
+                right: 10px;
+            }
+        }
+
+        .download-buttons a:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* 只保留内容，移除页眉背景和定位 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: transparent; /* 背景透明 */
+            position: static; /* 移除固定定位 */
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: none; /* 移除背景模糊 */
+        }
+
+        header .logo img {
+            width: 250px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.5rem; /* 修改字体大小 */
+            font-family: 'Nunito', sans-serif; /* 使用 Nunito 字体 */
+        }
+
+        /* Footer */
+        footer {
+            position: absolute; /* 将 footer 固定在页面底部 */
+            bottom: 0; /* 保持在底部 */
+            width: 100%; /* 使其宽度为页面的 100% */
+            text-align: center; /* 居中对齐内容 */
+            padding: 20px;
+            background-color: transparent; /* 去掉背景 */
+            font-size: 0.9rem;
+        }
+
+        /* 社交图标 */
+        .social-icons a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            background: transparent; /* 移除背景 */
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .content h1 {
+                font-size: 2.5rem;
+            }
+
+            .content h2 {
+                font-size: 1.2rem;
+            }
+
+            .download-buttons a {
+                padding: 10px 20px;
+            }
+        }
+
+        /* 图片容器 */
+        .image-gallery {
+            position: relative;
+            width: 525px;  /* 或者设置固定宽度 */
+            height: 150px;  /* 图片容器的高度 */
+            overflow: hidden; /* 隐藏溢出容器的部分 */
+        }
+
+        /* 每张图片的样式 */
+        .image-slide {
+            position: absolute; /* 定位每张图片在容器内 */
+            top: 0;
+            left: 0;
+            width: 100%; /* 每张图片占满容器宽度 */
+            height: 100%; /* 每张图片占满容器高度 */
+            object-fit: cover; /* 保持图片比例填充容器 */
+            opacity: 0; /* 初始时图片不可见 */
+            animation: slide 16s infinite; /* 设置动画持续时间为 16 秒 */
+        }
+
+        /* 设置第一张图片初始可见 */
+        .image-gallery a:nth-child(1) .image-slide {
+            opacity: 1;
+            z-index: 10;
+        }
+
+       /* 修复后的图片切换动画 */
+        @keyframes slide {
+            0% {
+                opacity: 0;
+                z-index: 1; /* 不可见时层级低 */
+            }
+            5% {
+                opacity: 1;
+                z-index: 10; /* 可见时层级高 */
+            }
+            25% {
+                opacity: 1;
+                z-index: 10;
+            }
+            30% {
+                opacity: 0;
+                z-index: 1; /* 淡出后层级降低 */
+            }
+            100% {
+                opacity: 0;
+                z-index: 1;
+            }
+        }
+
+        /* 为每张图片设置不同的显示时间 - 修正选择器 */
+        .image-gallery a:nth-child(1) .image-slide {
+            animation-delay: 0s; /* 第一张图片从 0s 开始 */
+        }
+
+        .image-gallery a:nth-child(2) .image-slide {
+            animation-delay: 4s; /* 第二张图片从 4s 开始 */
+        }
+
+        .image-gallery a:nth-child(3) .image-slide {
+            animation-delay: 8s; /* 第三张图片从 8s 开始 */
+        }
+
+        .image-gallery a:nth-child(4) .image-slide {
+            animation-delay: 12s; /* 第四张图片从 12s 开始 */
+        }
+
+
+        /* 页面容器 */
+        .container {
+            position: relative;  /* 确保 play-icon 和 video 可以绝对定位 */
+            text-align: center;
+            margin-top: 100px;  /* 确保文字和视频有间隙 */
+        }
+
+        /* WELCOME TO KIVOTOS! 样式 */
+        h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-top: 50px;
+        }
+
+        /* 播放图标 */
+        .play-icon {
+            position: absolute;
+            top: -40px;  /* 位于文字上方 */
+            right: 0;  /* 贴右侧 */
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: transparent;
+            cursor: pointer;  /* 鼠标指针变化，表示可点击 */
+            z-index: 10;  /* 保证图标位于最上层 */
+        }
+
+        /* 圆形边框 */
+        .circle {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border: 3px solid white;
+            border-radius: 50%;
+        }
+
+        /* 播放按钮（三角形） */
+        .triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid white; /* 播放图标（三角形） */
+            transform: rotate(-90deg); /* 逆时针旋转 90 度 */
+        }
+
+        /* 视频播放器 */
+        #myVideo {
+            display: none; /* 默认隐藏视频 */
+            width: 100%;
+            max-width: 500px;
+        }
+
+    </style>
 </head>
 <body>
 
-<!--This is a comment-->
-<hr/>
-<b>This text is blod</b>
-<br/>
-<strong>This text is strong</strong>
-<big>This text is big</big>
-</p>
+    <!-- 自动播放并循环的音频 -->
+    <audio autoplay loop>
+        <source src="image/Mitsukiyo _ KARUT _ Nor - RE Aoharu.ogg" type="audio/ogg">
+    </audio>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="image/BlueArchive_ba-style@logo.bluearchive.cc (1).png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="http://localhost:63342/2025summer/web/index.html?_ijt=v221hohf2u9255pqb2cp4j5eov">Home</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Media</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section with content at the bottom-right -->
+    <section class="hero">
+        <div class="content">
+            <h1>WELCOME TO KIVOTOS!</h1>
+            <div class="play-icon">
+                <div class="circle"></div>
+                <div class="triangle"></div>
+            </div>
+            <h2>「where all miracles begin」</h2>
+
+            <!-- 循环切换的图片 -->
+            <div class="image-gallery">
+                <a href="https://bluearchive-cn.com/news/1248" target="_blank">
+                    <img src="image/K9VYig0O.jpeg" alt="Image 1" class="image-slide">
+                </a>
+                <a href="https://bluearchive-cn.com/news/1188" target="_blank">
+                    <img src="image/1ZWmwhro.png" alt="Image 2" class="image-slide">
+                </a>
+                <a href="https://bluearchive-cn.com/news/1234" target="_blank">
+                    <img src="image/JJZITohA.jpeg" alt="Image 3" class="image-slide">
+                </a>
+                <a href="https://bluearchive-cn.com/news/1454" target="_blank">
+                    <img src="image/HLD7Sxby.jpeg" alt="Image 4" class="image-slide">
+                </a>
+            </div>
+
+            <div class="download-buttons">
+                <a href="https://bluearchive-cn.com" class="download-buttons" target="_blank">Download</a>
+                <a href="https://account.yostar.cn/login" class="download-button" target="_blank">Sign Up</a>
+                <a href="https://bluearchive.nexon.com/home" class="download-button" target="_blank">Learn More</a>
+                <a href="http://localhost:63342/2025summer/web/page2.html?_ijt=q7bruat57mohhthik3719d6tg7" class="download-button" target="_blank">Start Now</a>
+            </div>
+        </div>
+    </section>
+
+   <footer>
+        <p>&copy; 2025 My Web Page. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+
+    <!-- 视频播放器 -->
+    <video id="myVideo" width="500" controls style="display:none;">
+        <source src="image/《蔚蓝档案》PV-4（4K 40码率 60帧率）无水印纯享版_480P MP4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
 </body>
 </html>
