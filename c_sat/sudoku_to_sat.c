@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <math.h>
 
+#include "list.h"
+#include "dict.h"
 #include "dpll.h"
 #include "sudoku.h"
 #include "sudoku_to_sat.h"
@@ -18,7 +20,6 @@ PtrList* cross_line = NULL;
 //初始化数独结构
 void init_sudoku_structures()
 {
-    //以行切分数独
     rows = list_create(9);
     for (int i = 1; i < 10; i++)
     {
@@ -28,7 +29,6 @@ void init_sudoku_structures()
         list_append(rows, s_rows);
     }
 
-    //以列切分数独
     cols = list_create(9);
     for (int i = 1; i < 10; i++)
     {
@@ -38,10 +38,9 @@ void init_sudoku_structures()
         list_append(cols, s_cols);
     }
 
-    //以九宫格切分数独
     boxes = list_create(9);
-    int box_rows[] = {1, 4, 7};
-    int box_cols[] = {1, 4, 7};
+    int box_rows[] = { 1, 4, 7 };
+    int box_cols[] = { 1, 4, 7 };
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
@@ -51,7 +50,6 @@ void init_sudoku_structures()
         }
     }
 
-    //百分号中的两个九宫格
     pcf_boxes = list_create(2);
     list_append(pcf_boxes, get_box(2, 2));
     list_append(pcf_boxes, get_box(6, 6));
@@ -60,7 +58,6 @@ void init_sudoku_structures()
     append_coordiante(pcf_centers, 3, 3);
     append_coordiante(pcf_centers, 7, 7);
 
-    //副对角线
     cross_line = list_create(1);
     PtrList* s_cross_line = list_create(9);
     for (int r = 1; r <= 9; r++)
@@ -119,7 +116,7 @@ void create_cnf(char* filename)
             {
                 for (int j = i + 1; j < 9; j++)
                 {
-                    Coordinate *c1, *c2;
+                    Coordinate* c1, * c2;
                     list_get(rng, i, &c1);
                     list_get(rng, j, &c2);
                     int x1 = c1->row;

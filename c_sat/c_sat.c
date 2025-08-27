@@ -1,6 +1,4 @@
-﻿#define _CRTDBG_MAP_ALLOC
-
-#include <stdlib.h>
+﻿#include <stdlib.h>
 #include <crtdbg.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -22,7 +20,7 @@ int compare_abs(const void* a, const void* b)
 }
 
 
-int main2()
+int main()
 {
     srand((unsigned)time(NULL));
 
@@ -32,7 +30,6 @@ int main2()
 
     while (1)
     {
-        printf("\n------------------------------");
         printf("\nSAT -- 1, Percent-Sudoku -- 2, exit -- 0\n");
         printf("Please choose a number: ");
         int op;
@@ -70,7 +67,7 @@ int main2()
             else
                 printf("No solution found!\n");
 
-            printf("(time cost: %.4f s)", elapsed);
+            printf("(time cost: %.4f s)\n", elapsed);
 
             list_destroy(cur_literals, NULL);
         }
@@ -165,29 +162,4 @@ int main2()
             printf("Invalid input!\n");
         }
     }
-
-    _CrtDumpMemoryLeaks();
-    return 0;
-}
-
-void dump_clause(Clause* c)
-{
-    for (int i = 0; i < c->size; ++i)
-    {
-        int v;
-        Clause_get(c, i, &v);
-        printf("%d ", v);
-    }
-    printf("\n");
-}
-
-int main(void)
-{
-    Clause* c = Clause_create(1);
-    for (int i = 0; i < 1000; ++i)
-    {
-        Clause_append(c, i);
-    }
-    dump_clause(c);
-    return 0;
 }

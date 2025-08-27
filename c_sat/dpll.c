@@ -3,9 +3,9 @@
 #include <string.h>
 
 #include "dict.h"
+#include "list.h"
 #include "sudoku.h"
 #include "dpll.h"
-
 
 //°´ÕÕ¿Õ¸ñ·Ö¸î×Ö·û´®
 PtrList* str_split(const char* s)
@@ -177,7 +177,7 @@ int find_literal(PtrList* clauses)
     int max_lit = first_kv->key;
 
     list_destroy(sorted_kv, NULL);
-    dict_destory(freq);
+    dict_destroy(freq);
 
     return max_lit;
 }

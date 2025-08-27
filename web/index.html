@@ -5,7 +5,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto-Play Music</title>
+    <title>index</title>
     <style>
         /* Reset styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -334,11 +334,6 @@
 </head>
 <body>
 
-    <!-- 自动播放并循环的音频 -->
-    <audio autoplay loop>
-        <source src="image/Mitsukiyo _ KARUT _ Nor - RE Aoharu.ogg" type="audio/ogg">
-    </audio>
-
     <!-- Header -->
     <header>
         <div class="logo">
@@ -359,10 +354,10 @@
     <section class="hero">
         <div class="content">
             <h1>WELCOME TO KIVOTOS!</h1>
-            <div class="play-icon">
-                <div class="circle"></div>
-                <div class="triangle"></div>
-            </div>
+<!--            <div class="play-icon">-->
+<!--                <div class="circle"></div>-->
+<!--                <div class="triangle"></div>-->
+<!--            </div>-->
             <h2>「where all miracles begin」</h2>
 
             <!-- 循环切换的图片 -->
@@ -397,13 +392,30 @@
             <a href="#">Twitter</a>
             <a href="#">Instagram</a>
         </div>
-    </footer>
+   </footer>
 
-    <!-- 视频播放器 -->
-    <video id="myVideo" width="500" controls style="display:none;">
-        <source src="image/《蔚蓝档案》PV-4（4K 40码率 60帧率）无水印纯享版_480P MP4.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+<!--    &lt;!&ndash; 视频播放器 &ndash;&gt;-->
+<!--    <video id="myVideo" width="500" controls style="display:none;">-->
+<!--        <source src="image/《蔚蓝档案》PV-4（4K 40码率 60帧率）无水印纯享版_480P MP4.mp4" type="video/mp4">-->
+<!--        Your browser does not support the video tag.-->
+<!--    </video>-->
+
+<!--    <script>-->
+<!--        function playVideo() {-->
+<!--            var video = document.getElementById("myVideo");-->
+<!--            var playIcon = document.querySelector(".play-icon");-->
+
+<!--            // 打印调试信息，确保函数被调用-->
+<!--            console.log("Play icon clicked");-->
+
+<!--            // 如果视频是隐藏的，则显示并播放-->
+<!--            if (video.style.display === "none") {-->
+<!--                video.style.display = "block";  // 显示视频-->
+<!--                playIcon.style.display = "none";  // 隐藏播放图标-->
+<!--                video.play();  // 播放视频-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
 
 </body>
 </html>

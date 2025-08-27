@@ -6,28 +6,6 @@
 #include "list.h"
 
 
-int compare_clause(Clause* a, Clause* b)
-{
-    if (a == NULL || b == NULL) return false;
-
-    const int compare_size = min(a->size, b->size);
-    for (int i = 0; i < compare_size; i++)
-    {
-        const int va = a->data[i];
-        const int vb = b->data[i];
-        if (va > vb) return 1;
-        if (va < vb) return -1;
-    }
-
-    if (a->size > b->size) return 1;
-    if (a->size < b->size) return -1;
-    return 0;
-}
-
-DefineList(Clause, int, NULL, compare_int32)
-DefineList(ClauseList, Clause*, Clause_destroy, compare_clause)
-DefineList(StrList, char*, free, strcmp)
-
 // 创建新的 PtrList
 PtrList* list_create(int capacity)
 {
@@ -132,7 +110,6 @@ bool list_get_int(PtrList* list, int index, int* ret)
     return true; // 成功
 }
 
-
 // 设置整型元素
 bool list_set_int(PtrList* list, int index, int value)
 {
@@ -141,7 +118,6 @@ bool list_set_int(PtrList* list, int index, int value)
     list->ptrArray[index] = (void*)(int64_t)value;
     return true;
 }
-
 
 // 排序
 void list_sort(PtrList* list, comparer comp)
@@ -169,8 +145,6 @@ bool list_element_in_list(PtrList* list, const void* element, comparer comp)
     return false;
 }
 
-
-//判断整型元素是否在表内
 bool list_int_in_list(PtrList* list, int val)
 {
     if (!list) return false;
@@ -183,7 +157,6 @@ bool list_int_in_list(PtrList* list, int val)
 
     return false;
 }
-
 
 // 随机调换顺序
 void list_random_shuffle(PtrList* list)
@@ -200,19 +173,17 @@ void list_random_shuffle(PtrList* list)
     }
 }
 
-
-//比较整型元素
+// 比较两个整数
 int compare_int(const void* a, const void* b)
 {
-    int ia = (int)(int64_t) * (void**)a; // 直接转换指针值为整数
+    int ia = (int)(int64_t) * (void**)a;
     int ib = (int)(int64_t) * (void**)b;
     if (ia < ib) return -1;
     if (ia == ib) return 0;
     return 1;
 }
 
-
-//比较整型列表
+// 比较两个整数列表
 int compare_int_list(const PtrList* a, const PtrList* b)
 {
     if (a == NULL || b == NULL) return false;
@@ -231,8 +202,7 @@ int compare_int_list(const PtrList* a, const PtrList* b)
     return 0;
 }
 
-
-//用于qsort
+// qsort用的比较函数
 int compare_int_list_qsort(const void* a, const void* b)
 {
     return compare_int_list(*(PtrList**)a, *(PtrList**)b);
