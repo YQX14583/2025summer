@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "dict.h"
 #include "list.h"
@@ -186,11 +187,11 @@ int find_literal(PtrList* clauses)
 //dpll函数
 PtrList* dpll_reduce(PtrList* _cur_literals, PtrList* _cur_clauses)
 {
+
     PtrList* cur_literals = clone_clause(_cur_literals);
     PtrList* cur_clauses = clone_clauses(_cur_clauses);
 
     //通过单子句规则化简
-    //int loop_counter = 0;
     while (true)
     {
         bool found = false;
@@ -307,4 +308,43 @@ PtrList* dpll_reduce(PtrList* _cur_literals, PtrList* _cur_clauses)
 
     list_destroy(cur_literals, NULL);
     return result;
+}
+
+
+// 输出结果到.res文件
+void dpll_output_result(const char* filename, DPLLResult status, PtrList* solution, double time_ms)
+{
+    char output_file[1024];
+    strcpy_s(output_file,sizeof(output_file), filename);
+
+    // 替换扩展名为.res
+    char* dot = strrchr(output_file, '.');
+    if (dot) strcpy_s(dot, sizeof(dot),".res");
+    else strcat_s(output_file, sizeof(output_file), ".res");
+
+    FILE* fout = fopen(output_file, "w");
+    if (!fout) {
+        printf("Fail to create the file: %s\n", output_file);
+        return;
+    }
+
+    // 输出结果状态
+    fprintf(fout, "s %d\n", status);
+
+    // 输出解向量（如果可满足）
+    if (status == DPLL_SAT && solution) {
+        fprintf(fout, "v ");
+        for (int i = 0; i < solution->size; i++) {
+            int literal;
+            list_get_int(solution, i, &literal);
+            fprintf(fout, "%d ", literal);
+        }
+        fprintf(fout, "\n");
+    }
+
+    // 输出时间（毫秒）
+    fprintf(fout, "t %.0f\n", time_ms);
+
+    fclose(fout);
+    printf("The result is written in: %s\n", output_file);
 }

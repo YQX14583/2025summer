@@ -20,3 +20,13 @@ int find_literal(PtrList* clauses);
 PtrList* dpll_reduce(PtrList* cur_literals, PtrList* cur_clauses);
 // 嵌套PtrList销毁（用于子句列表）
 void destroy_clause(void* element);
+
+// 添加在文件末尾
+typedef enum {
+    DPLL_SAT = 1,
+    DPLL_UNSAT = 0,
+    DPLL_TIMEOUT = -1
+} DPLLResult;
+
+// 输出结果到文件
+void dpll_output_result(const char* filename, DPLLResult status, PtrList* solution, double time_ms);

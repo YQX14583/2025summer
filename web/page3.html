@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAT与数独求解系统流程图</title>
+    <script src="https://www.mermaidchart.com/app/projects/f3f7fd03-6ff4-4bdb-ab3a-443693e0faa6/diagrams/abddd339-34bc-4c6c-916a-0ea3498ee602/version/v0.1/edit"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'forest',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .description {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .flowchart {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: auto;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            max-width: 800px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>SAT与数独求解系统流程图</h1>
+    <p class="description">该流程图展示了SAT求解器与数独游戏求解系统的完整工作流程，从程序启动到最终结果输出的全过程。</p>
+
+    <div class="container">
+        <div class="flowchart">
+            <div class="mermaid">
+flowchart TD
+    A(["程序启动"]):::start
+
+    A --> B[显示交互环境<br>等待用户输入]
+    B --> C{SAT or %-Sudoku}:::decision
+
+    C -->|%-Sudoku| D[随机初始化<br>数独游戏格局]:::process
+    D --> E[%-Sudoku归约为SAT<br>化简与预处理]:::process
+    E --> F[SAT CNF算例解析<br>与内部表示]:::process
+
+    C -->|SAT| F
+
+    F --> G[DPLL]:::process
+    G --> H[SAT算例求解结果输出]:::output
+    H --> I[游戏求解结果处理<br>数独游戏操作]:::process
+    I --> J(["程序结束"]):::end
+
+    classDef start fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white;
+    classDef end fill:#F44336,stroke:#D32F2F,stroke-width:2px,color:white;
+    classDef decision fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:white;
+    classDef process fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:white;
+    classDef output fill:#9C27B0,stroke:#7B1FA2,stroke-width:2px,color:white;
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #4CAF50;"></div>
+                <span>开始/结束节点</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #2196F3;"></div>
+                <span>决策点</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #FF9800;"></div>
+                <span>处理过程</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #9C27B0;"></div>
+                <span>输出节点</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>SAT与数独求解系统流程图 | 使用Mermaid.js绘制</p>
+    </div>
+</body>
+</html>

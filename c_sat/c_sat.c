@@ -36,41 +36,44 @@ int main()
         scanf_s("%d", &op);
         printf("\n");
 
-        if (op == 1)
-        {
-            //输入1——读取cnf文件并计算结果
+        if (op == 1) {
             char filename[1024];
-            printf("Please input a filename : ");
+            printf("Please input a filename: ");
             scanf_s("%s", filename, (unsigned)_countof(filename));
             PtrList* cnf_clauses = read_cnf_file(filename);
 
-            //计算用时
+            // 计算用时
             clock_t start_time = clock();
             PtrList* cur_literals = list_create(10240);
             PtrList* result = dpll_reduce(cur_literals, cnf_clauses);
             clock_t end_time = clock();
             double elapsed = (double)(end_time - start_time) / CLOCKS_PER_SEC;
 
-            //输出结果
-            if (result)
-            {
+            // 输出结果
+            if (result) {
                 list_sort(result, compare_abs);
                 printf("The solution is: ");
-                for (int i = 0; i < result->size; i++)
-                {
+                for (int i = 0; i < result->size; i++) {
                     int v;
                     list_get_int(result, i, &v);
                     printf("%d ", v);
                 }
                 printf("\n");
+                // 输出到文件
+                dpll_output_result(filename, DPLL_SAT, result, elapsed);
             }
-            else
+            else {
                 printf("No solution found!\n");
+                // 输出到文件
+                dpll_output_result(filename, DPLL_UNSAT, NULL, elapsed);
+            }
 
             printf("(time cost: %.4f s)\n", elapsed);
 
             list_destroy(cur_literals, NULL);
+            list_destroy(cnf_clauses, destroy_clause);
         }
+
         else if (op == 2)
         {
             //输入2——随机生成百分号数独并求解
