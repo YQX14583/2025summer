@@ -11,9 +11,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="c_sat.c">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="dpll.c">
       <Filter>Source</Filter>
     </ClCompile>
@@ -30,6 +27,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="create_sudoku.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="c_sat.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

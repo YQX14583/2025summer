@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // 将字符串按空格分割成指针列表
 PtrList* str_split(const char* s);
@@ -30,3 +33,7 @@ typedef enum {
 
 // 输出结果到文件
 void dpll_output_result(const char* filename, DPLLResult status, PtrList* solution, double time_ms);
+
+#ifdef __cplusplus
+}
+#endif

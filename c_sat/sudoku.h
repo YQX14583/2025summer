@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "list.h"
 
@@ -19,3 +22,7 @@ void append_coordiante(PtrList* coordinates, int row, int col);
 bool sudoku_get_int(PtrList* sudoku, int i, int j, int* ret);
 // 设置数独矩阵中的整数
 bool sudoku_set_int(PtrList* sudoku, int i, int j, int value);
+
+#ifdef __cplusplus
+}
+#endif

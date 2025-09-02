@@ -31,7 +31,7 @@ PtrList* read_lines(const char* filename)
     FILE* file = fopen(filename, "r");
     if (!file)
     {
-        printf("文件打开失败");
+        printf("文件打开失败\n");
         return NULL;
     }
 
@@ -46,7 +46,7 @@ PtrList* read_lines(const char* filename)
     }
     if (ferror(file))
     {
-        printf("文件读取错误");
+        printf("文件读取错误\n");
         list_destroy(lines, free);
         lines = NULL;
     }

@@ -1,4 +1,7 @@
 ﻿#pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -44,3 +47,7 @@ int compare_int(const void* a, const void* b);
 int compare_int_list(const PtrList* a, const PtrList* b);
 // qsort用的比较函数
 int compare_int_list_qsort(const void* a, const void* b);
+
+#ifdef __cplusplus
+}
+#endif

@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // 打印数独棋盘
 void print_board(PtrList* sudoku);
@@ -14,3 +17,7 @@ void dig_holes(PtrList* sudoku, int holes);
 PtrList* create_puzzle();
 // 生成数独文件
 void create_sudoku_txt(PtrList* my_sudoku);
+
+#ifdef __cplusplus
+}
+#endif

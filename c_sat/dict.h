@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <stdbool.h>
 #include "list.h"
@@ -34,3 +37,7 @@ bool dict_get(const Dict* dict, int key, int* value);
 typedef int (*kv_comparer)(const KV* a, const KV* b);
 // ×ÖµäÅÅÐò
 PtrList* dict_sorted(const Dict* dict, kv_comparer comp);
+
+#ifdef __cplusplus
+}
+#endif

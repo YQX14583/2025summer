@@ -1,4 +1,7 @@
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <stdlib.h>
 #include "list.h"
@@ -15,3 +18,7 @@ extern PtrList* cross_line;
 void init_sudoku_structures();
 // 将数独文件转为cnf文件 
 void create_cnf(char* filename);
+
+#ifdef __cplusplus
+}
+#endif

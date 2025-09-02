@@ -71,7 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="create_sudoku.c" />
-    <ClCompile Include="c_sat.c" />
+    <ClCompile Include="c_sat.cpp" />
     <ClCompile Include="dict.c" />
     <ClCompile Include="dpll.c" />
     <ClCompile Include="list.c" />

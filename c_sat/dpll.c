@@ -34,6 +34,7 @@ PtrList* read_cnf_file(const char* filename)
 {
     //逐行读取cnf文件
     PtrList* lines = read_lines(filename);
+    if (!lines) return NULL;
     PtrList* clauses = list_create(100);
     for (int i = 0; i < lines->size; i++)
     {
