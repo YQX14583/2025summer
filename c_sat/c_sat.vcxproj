@@ -77,11 +77,13 @@
     <ClCompile Include="list.c" />
     <ClCompile Include="sudoku.c" />
     <ClCompile Include="sudoku_to_sat.c" />
+    <ClCompile Include="dpll_1.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="create_sudoku.h" />
     <ClInclude Include="dict.h" />
     <ClInclude Include="dpll.h" />
+    <ClInclude Include="dpll_1.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="sudoku.h" />
     <ClInclude Include="sudoku_to_sat.h" />

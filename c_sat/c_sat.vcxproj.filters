@@ -32,6 +32,9 @@
     <ClCompile Include="c_sat.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="dpll_1.c">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h">
@@ -50,6 +53,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="dpll.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="dpll_1.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
